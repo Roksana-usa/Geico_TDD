@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+	<parameter name="browser" value="chrome" />
+	<test thread-count="5" name="Test">
+		<parameter name="title" value="The Insurance Savings You Expect"></parameter>
+		<parameter name="subTitle"
+			value="See how much you could save! Let's get started by entering your ZIP Code:"></parameter>
+		<parameter name="searchField" value="auto"></parameter>
+
+		<classes>
+			<class name="geico.testPages.HomePageParamTest" />
+		</classes>
+	</test> <!--
+	Test -->
+</suite>
+<!--Suite -->

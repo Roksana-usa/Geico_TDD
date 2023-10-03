@@ -1,0 +1,76 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.geico</groupId>
+	<artifactId>com.geico</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>Great help for all Americans</name>
+
+	<dependencies>
+		<!--
+		https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>4.11.0</version>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/org.testng/testng -->
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>7.8.0</version>
+
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/com.aventstack/extentreports -->
+		<dependency>
+			<groupId>com.aventstack</groupId>
+			<artifactId>extentreports</artifactId>
+			<version>5.1.0</version>
+		</dependency>
+		
+		<!--If you add a new dependency you do right click, maven, then update project -->
+		<!--
+		https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
+		<dependency>
+			<groupId>io.github.bonigarcia</groupId>
+			<artifactId>webdrivermanager</artifactId>
+			<version>5.4.1</version>
+		</dependency>
+
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<!--
+				https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
+				<!-- maven-compiler-plugin is used to compile the maven build-->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.11.0</version>
+				<configuration>
+					<!-- Here 1.11 is actually your Java Version-->
+					<source>1.11</source>
+					<target>1.11</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<!--
+				https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
+				<!-- maven-surefire-plugin is used to start the building-->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.1.2</version>
+			</plugin>
+
+
+		</plugins>
+	</build>
+
+</project>

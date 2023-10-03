@@ -1,0 +1,26 @@
+package com.geico.reports;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import org.testng.Reporter;
+
+import com.aventstack.extentreports.Status;
+
+
+
+public class Loggers {
+	
+	
+	
+	
+
+	static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+	
+	public static void log(String msg) {
+		logger.log(Level.INFO,msg);
+		Reporter.log(msg + "<br>");
+		ExtentTextManager.getTest().log(Status.INFO, msg);
+	}
+
+}
