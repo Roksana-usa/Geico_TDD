@@ -26,6 +26,7 @@ public class HomePageTest extends BaseClass {
 		homePage.mailInZipCode("11432");
 		homePage.verifyLength("5");
 		homePage.clickContinueBtn();
+		homePage.eorrorMsgVerify("The information you entered does not match our system. Please try again.");
 	
 		//homePage.hoverActionOurLocations();
 	

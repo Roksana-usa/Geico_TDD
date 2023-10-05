@@ -28,6 +28,7 @@ public class CommonActions {
 		} catch (NoSuchElementException e) {
 			e.printStackTrace();
 			Loggers.log(element + " ---> Not Found \n" + e.getMessage());
+			Assert.fail();
 		}
 	}
 
@@ -75,12 +76,12 @@ public class CommonActions {
 		} catch (NoSuchElementException e) {
 			e.printStackTrace();
 			Loggers.log(element + " ---> Not Found \n" + e.getMessage());
+			Assert.fail();
 		}
 	}
 
 	public static void verifyElementText(WebElement element, String expected) {
 		String actual = element.getText();
-		String expt = expected;
 		Loggers.log(element + " ---> Actula text : " + actual + "Expected text :" + expected);
 		Assert.assertEquals(actual, expected);
 	}
@@ -92,7 +93,6 @@ public class CommonActions {
 
 	public static void verifyInnerHTML(WebElement element, String expected) {
 		String actual = element.getAttribute("innerHTML");
-
 		Loggers.log(element + " ---> Actula text : " + actual + ". Expected text : " + expected);
 		Assert.assertEquals(actual, expected);
 	}
@@ -104,6 +104,7 @@ public class CommonActions {
 		} catch (NoSuchElementException e) {
 			e.printStackTrace();
 			Loggers.log(element + " ---> Not Found \n" + e.getMessage());
+			Assert.fail();
 		}
 	}
 

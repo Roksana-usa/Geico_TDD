@@ -5,7 +5,7 @@ package com.geico.reports;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import java.util.HashMap;
-public class ExtentTextManager {
+public class ExtentTestManager {
 
 static HashMap<Long, ExtentTest> tests = new HashMap<>();
 	

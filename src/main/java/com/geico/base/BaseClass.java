@@ -4,7 +4,6 @@ import static com.geico.constants.IBrowserConstant.*;
 
 import java.lang.reflect.Method;
 import java.time.Duration;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -21,12 +20,13 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
-
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.geico.constants.ConfigConstant;
 import com.geico.pages.HomePage;
+import com.geico.reports.ExtentManager;
+import com.geico.reports.ExtentTestManager;
 import com.geico.utils.ReadConfig;
 import com.geico.utils.ReadFile;
 import com.geico.common.CommonActions;
@@ -39,11 +39,17 @@ public class BaseClass {
 	public WebDriver driver;// new chromDriver();
 	public HomePage homePage;
 	protected WebElement element;
-public Actions actions;
-public Select select;
-public ReadFile readFile;
-public ExtentTest extentTest;
-ExtentReports report;
+	public Actions actions;
+	public Select select;
+	public ReadFile readFile;
+	public ExtentTest extentTest;
+	ExtentReports report;
+
+	@BeforeSuite
+	public void initialReporting() {
+		report = ExtentManager.initialReports();
+	}
+
 	@BeforeClass
 	public void beforeClassSetUp() {
 		conf = new ReadConfig();
@@ -51,7 +57,6 @@ ExtentReports report;
 
 	@Parameters(BROWSER)
 	@BeforeMethod
-
 	public void setUpDriver(@Optional(CHROME) String browserName) {
 		driver = initializingBrowser(browserName);
 		driver.manage().window().maximize();
@@ -87,33 +92,36 @@ ExtentReports report;
 		homePage = new HomePage(driver);
 	}
 
-	
-	//@AfterMethod
+	@BeforeMethod
+	public void initialTest(Method method) {
+		extentTest = ExtentTestManager.createTest(report, method.getName());
+		extentTest.assignCategory(method.getDeclaringClass().getName());
+	}
+
+	@AfterMethod
 	public void afterEachTest(Method method, ITestResult result) {
-		for(String group: result.getMethod().getGroups()) {
+		for (String group : result.getMethod().getGroups()) {
 			extentTest.assignCategory(group);
 		}
-		
-		if(result.getStatus() == ITestResult.SUCCESS) {
+
+		if (result.getStatus() == ITestResult.SUCCESS) {
 			extentTest.log(Status.PASS, "Test PASSED");
-		}else if(result.getStatus() == ITestResult.FAILURE) {
+		} else if (result.getStatus() == ITestResult.FAILURE) {
 			extentTest.addScreenCaptureFromPath(CommonActions.getSreenShot(method.getName(), driver));
 			extentTest.log(Status.FAIL, "Test FAILED");
-		}else if(result.getStatus() == ITestResult.SKIP) {
+		} else if (result.getStatus() == ITestResult.SKIP) {
 			extentTest.log(Status.SKIP, "Test SKIPPED");
 		}
-		tearUp();
+		//tearUp();
 	}
-	@AfterMethod
+
+	// @AfterMethod
 	public void tearUp() {
 		driver.quit();
 	}
-	
+
 	@AfterSuite
 	public void publishReport() {
 		report.flush();
 	}
 }
-
-
-

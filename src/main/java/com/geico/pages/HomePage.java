@@ -38,7 +38,7 @@ public class HomePage {
 
 	@FindBy(xpath = "(//span[text()='Log In'])[1]")
 	WebElement loginButton;
-
+	//form[@id='manageForm']//button[@id='manageSubmit'] click loginbtn
 	@FindBy(xpath = "//form[@id='manageForm']//button[@id='manageSubmit']")
 	WebElement ClickLogInBtn;
 
@@ -66,15 +66,12 @@ public class HomePage {
 	@FindBy(xpath = "//div[@class='headline-zip']//p[1]")
 	WebElement subTitle;
 
-	@FindBy(xpath = "//a[normalize-space(text()) = 'Our Locations' and @class='hidden-xs dropdown']")
-	WebElement hoverOverOurLocations;
+	//@FindBy(xpath = "//a[normalize-space(text()) = 'Our Locations' and @class='hidden-xs dropdown']")
+	//WebElement hoverOverOurLocations;
 
-//a[@class='hidden-xs'])[1]" hover over xpath
-	@FindBy(xpath = "//div[@class='card selected']//p[contains(text(),'Renters')]")
-	WebElement rentersCard;
-	
-	@FindBy(xpath="//div[@class='card selected']//p[contains(text(),'Homeowners')]")
-     WebElement homewoners;
+
+	@FindBy(xpath="//p[text()='The information you entered does not match our system. Please try again.']")
+	WebElement verifyErrorMsg;
 	
 	@FindBy(xpath = "//section[contains(@class,'flex-auto')]")
 	List<WebElement> headLineMenu;
@@ -82,9 +79,6 @@ public class HomePage {
 	public void clearZipCode() {
 		clear(clickMailInZipCode);
 	}
-
-	@FindBy(xpath = "//a[@aria-label='search']")
-	WebElement clickGeicoIcon;
 
 	public void typeInSearchField(String input) {
 		click(zipCodeSearch);
@@ -97,7 +91,7 @@ public class HomePage {
 
 	public void clickLoginBtn() {
 		click(loginButton);
-		click(ClickLogInBtn);
+		
 	}
 
 	public void clickSecondLoginBtn() {
@@ -135,6 +129,10 @@ public class HomePage {
 	public void subTitleTest(String expected) {
 		verifyElementText(subTitle, expected);
 	}
+	
+	public void eorrorMsgVerify(String expected) {
+		verifyElementText(verifyErrorMsg, expected);
+	}
 
 	
 
@@ -147,7 +145,7 @@ public class HomePage {
 		//Thread.sleep(4000);
 		Actions actions = new Actions(driver); // Actions class is instantiated in base class, actions object came form
 												// there
-		actions.moveToElement(hoverOverOurLocations).perform();
+		//actions.moveToElement(hoverOverOurLocations).perform();
 		
 
 	}
